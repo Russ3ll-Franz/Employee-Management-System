@@ -1,0 +1,66 @@
+<br>
+<div class="container">
+
+    <div class="col-sm-6 col-sm-12">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="background-color:#e0e0d4;">
+                <br>
+                <img style="margin-left: 170px;" height="150px" width="150px" [src]="fullImage">
+                <br>
+                <h3 class="text-center">Login to the system</h3>
+                <br>
+                <form class="form-horizontal" class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="form-group row" [ngClass]="{'has-error': (loginForm.get('email').touched || loginForm.get('email').dirty) &&
+                !loginForm.get('email').valid }">
+                        <label class="col-sm-3">
+                            <strong>Email: </strong>
+                        </label>
+                        <div class="col-sm-8">
+                            <i style="position: relative;top: 24px;right: -280px;cursor: pointer;" class="glyphicon glyphicon-user"></i>
+                            <!-- <input formControlName="email"> -->
+                            <input type="text" formControlName="email" class="form-control form-control-sm" placeholder="Your Email">
+                            <span class="text-danger" *ngIf="(loginForm.get('email').touched || loginForm.get('email').dirty) && 
+                        loginForm.get('email').errors">
+                                <span *ngIf="loginForm.get('email').errors.required">Please enter your email address.</span>
+                                <br>
+                                <span *ngIf="loginForm.get('email').errors.email">Please enter a valid email address.</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" [ngClass]="{'has-error': (loginForm.get('password').touched || loginForm.get('password').dirty) &&
+                !loginForm.get('password').valid }">
+                        <label class="col-sm-3">
+                            <strong>Password: </strong>
+                        </label>
+
+                        <div class="col-sm-8">
+                            <i style="position: relative;top: 24px;right: -280px;cursor: pointer;" class="fa fa-user"></i>
+                            <!-- <input formControlName="password"> -->
+                            <input type="{{password ? 'text' : 'password' }}" formControlName="password" class="form-control form-control-sm" placeholder="Your Password"
+                                required>
+                            <span class="form-control-password" style="float:right;" (click)="togglePassword()">{{password ? 'Hide': 'Show'}}</span>
+                            <span class="text-danger" *ngIf="(loginForm.get('password').touched || loginForm.get('password').dirty) && 
+loginForm.get('password').errors">
+                                <span *ngIf="loginForm.get('password').errors.required">Please enter your password.</span>
+                                <span *ngIf="loginForm.get('password').errors.minlength">The password must be longer than 6 characters.</span>
+                                <span *ngIf="loginForm.get('password').errors.maxlength">The password must be not longer than 30 characters.</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" style="margin-right: 8px; cursor: pointer;">Login</button>
+                        <button type="button" class="btn btn-default" (click)="cancel()" style="cursor: pointer;">Cancel</button>
+                    </div>
+                    <div class="text-center">
+                        <a routerLink="(['/login'])">Forgot Password ?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
